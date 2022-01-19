@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style type="text/css">
+      #url {
+        display: flex;
+        margin: 20px auto;
+        border: red solid 1px;
+      }
+      #decode {
+        display: flex;
+        margin: 5px auto;
+      }
+      #clear {
+        display: flex;
+        margin: 5px auto;
+      }
+      pre {
+        display: flex;
+        align-items: center;
+      }
+      code {
+        display: flex;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="url" type="text" id="url" />
+    <input id="clear" type="button" value="Clear" onclick="cl()" />
+    <input type="button" value="Decode" id="decode" onclick="deco()" />
+    <pre>
+    <code id="p"></code>
+    </pre>
+    <script>
+      function deco() {
+        let url = document.getElementById("url").value;
+        let p = document.getElementById("p");
+        if (url) {
+          p.innerHTML = "";
+          let data = url.split("p=", 2);
+          if ((data.length == 1)) {
+            return (p.textContent = "URL no valid");
+          } else {
+            let code = data[1].toString();
+            let decode = atob(code);
+            return (p.textContent = decode
+              .replaceAll(",", "\n")
+              .replace("\{", "")
+              .replace("\}", ""));
+          }
+        }
+        p.textContent = "Please insert a correct url";
+      }
+
+      function cl() {
+        let url = document.getElementById("url");
+        let p = document.getElementById("p");
+        url.value = "";
+        p.textContent = "";
+      }
+    </script>
+  </body>
+</html>
